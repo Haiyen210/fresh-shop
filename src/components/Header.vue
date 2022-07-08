@@ -1,8 +1,6 @@
 <template>
   <!-- HEADER AREA START (header-5) -->
-  <header
-    class="ltn__header-area ltn__header-5 ltn__header-transparent gradient-color-4---"
-  >
+  <header class="ltn__header-area ltn__header-5 ltn__header-transparent gradient-color-4---">
     <!-- ltn__header-top-area start -->
     <div class="ltn__header-top-area">
       <div class="container">
@@ -11,15 +9,12 @@
             <div class="ltn__top-bar-menu">
               <ul>
                 <li>
-                  <a href="locations.html"
-                    ><i class="icon-placeholder"></i> 15/A, Nest Tower, NYC</a
-                  >
+                  <a href="locations.html"><i class="icon-placeholder"></i>238 Hoàng Quốc Việt, Cổ
+                    Nhuế 1, Cầu Giấy, Hà Nội</a>
                 </li>
                 <li>
-                  <a
-                    href="mailto:info@webmail.com?Subject=Flower%20greetings%20to%20you"
-                    ><i class="icon-mail"></i> info@webmail.com</a
-                  >
+                  <a href="mailto:info@webmail.com?Subject=Flower%20greetings%20to%20you"><i class="icon-mail"></i>
+                    bkap@gmail.com</a>
                 </li>
               </ul>
             </div>
@@ -30,14 +25,10 @@
                 <ul>
                   <li>
                     <!-- ltn__language-menu -->
-                    <div
-                      class="ltn__drop-menu ltn__currency-menu ltn__language-menu"
-                    >
+                    <div class="ltn__drop-menu ltn__currency-menu ltn__language-menu">
                       <ul>
                         <li>
-                          <a href="#" class="dropdown-toggle"
-                            ><span class="active-currency">English</span></a
-                          >
+                          <a href="#" class="dropdown-toggle"><span class="active-currency">English</span></a>
                           <ul>
                             <li><a href="#">Arabic</a></li>
                             <li><a href="#">Bengali</a></li>
@@ -55,25 +46,17 @@
                     <div class="ltn__social-media">
                       <ul>
                         <li>
-                          <a href="#" title="Facebook"
-                            ><i class="fab fa-facebook-f"></i
-                          ></a>
+                          <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
                         </li>
                         <li>
-                          <a href="#" title="Twitter"
-                            ><i class="fab fa-twitter"></i
-                          ></a>
+                          <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
                         </li>
 
                         <li>
-                          <a href="#" title="Instagram"
-                            ><i class="fab fa-instagram"></i
-                          ></a>
+                          <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
                         </li>
                         <li>
-                          <a href="#" title="Dribbble"
-                            ><i class="fab fa-dribbble"></i
-                          ></a>
+                          <a href="#" title="Dribbble"><i class="fab fa-dribbble"></i></a>
                         </li>
                       </ul>
                     </div>
@@ -88,9 +71,7 @@
     <!-- ltn__header-top-area end -->
 
     <!-- ltn__header-middle-area start -->
-    <div
-      class="ltn__header-middle-area ltn__header-sticky ltn__sticky-bg-white sticky-active-into-mobile--- plr--9---"
-    >
+    <div class="ltn__header-middle-area ltn__header-sticky ltn__sticky-bg-white sticky-active-into-mobile--- plr--9---">
       <div class="container">
         <div class="row">
           <div class="col">
@@ -106,202 +87,13 @@
                 <div class="ltn__main-menu">
                   <ul>
                     <li class="menu-icon">
-                      <a href="#">Home</a>
-                      <ul
-                        class="sub-menu menu-pages-img-show ltn__sub-menu-col-2---"
-                      >
-                        <li>
-                          <a href="index-2.html">Home Style 01</a>
-                          <img src="img/home-demos/home-1.jpg" alt="#" />
-                        </li>
-                        <li>
-                          <a href="index-3.html">Home Style 02</a>
-                          <img src="img/home-demos/home-2.jpg" alt="#" />
-                        </li>
-                        <li>
-                          <a href="index-4.html">Home Style 03</a>
-                          <img src="img/home-demos/home-3.jpg" alt="#" />
-                        </li>
-                        <li>
-                          <a href="index-5.html">Home Style 04</a>
-                          <img src="img/home-demos/home-4.jpg" alt="#" />
-                        </li>
-                        <li>
-                          <a href="index-6.html"
-                            >Home Style 05
-                            <span class="menu-item-badge">video</span></a
-                          >
-                          <img src="img/home-demos/home-5.jpg" alt="#" />
-                        </li>
-                        <li>
-                          <a href="index-7.html">Home Style 06</a>
-                          <img src="img/home-demos/home-6.jpg" alt="#" />
-                        </li>
-                        <li>
-                          <a href="index-8.html">Home Style 07</a>
-                          <img src="img/home-demos/home-7.jpg" alt="#" />
-                        </li>
-                        <li>
-                          <a href="index-9.html">Home Style 08</a>
-                          <img src="img/home-demos/home-8.jpg" alt="#" />
-                        </li>
-                        <li>
-                          <a href="index-10.html">Home Style 09</a>
-                          <img src="img/home-demos/home-9.jpg" alt="#" />
-                        </li>
-                        <li>
-                          <a href="index-11.html">Home Style 10</a>
-                          <img src="img/home-demos/home-10.jpg" alt="#" />
-                        </li>
-                        <li>
-                          <a href="index-12.html"
-                            >Home Style 11
-                            <span class="menu-item-badge">Service</span></a
-                          >
-                          <img src="img/home-demos/home-11.jpg" alt="#" />
-                        </li>
-                      </ul>
+                      <router-link :to="{ name: 'Home' }">Trang Chủ</router-link>
                     </li>
                     <li class="menu-icon">
-                      <a href="#">About</a>
-                      <ul>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="service.html">Services</a></li>
-                        <li>
-                          <a href="service-details.html">Service Details</a>
-                        </li>
-                        <li><a href="portfolio.html">Gallery</a></li>
-                        <li><a href="portfolio-2.html">Gallery - 02</a></li>
-                        <li>
-                          <a href="portfolio-details.html">Gallery Details</a>
-                        </li>
-                        <li><a href="team.html">Team</a></li>
-                        <li><a href="team-details.html">Team Details</a></li>
-                        <li><a href="faq.html">FAQ</a></li>
-                        <li>
-                          <a href="locations.html">Google Map Locations</a>
-                        </li>
-                      </ul>
+                      <router-link :to="{ name: 'Product' }">Sản Phẩm</router-link>
                     </li>
                     <li class="menu-icon">
-                      <a href="#">Shop</a>
-                      <ul>
-                        <li><a href="shop.html">Shop</a></li>
-                        <li><a href="shop-grid.html">Shop Grid</a></li>
-                        <li>
-                          <a href="shop-left-sidebar.html">Shop Left sidebar</a>
-                        </li>
-                        <li>
-                          <a href="shop-right-sidebar.html"
-                            >Shop right sidebar</a
-                          >
-                        </li>
-                        <li>
-                          <a href="product-details.html">Shop details </a>
-                        </li>
-                        <li>
-                          <a href="product-details-no-sidebar.html"
-                            >Shop details no sidebar
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#"
-                            >Other Pages <span class="float-right">>></span></a
-                          >
-                          <ul>
-                            <li><a href="cart.html">Cart</a></li>
-                            <li><a href="wishlist.html">Wishlist</a></li>
-                            <li><a href="checkout.html">Checkout</a></li>
-                            <li>
-                              <a href="order-tracking.html">Order Tracking</a>
-                            </li>
-                            <li><a href="account.html">My Account</a></li>
-                            <li><a href="login.html">Sign in</a></li>
-                            <li><a href="register.html">Register</a></li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </li>
-                    <li class="menu-icon">
-                      <a href="#">News</a>
-                      <ul>
-                        <li><a href="blog.html">News</a></li>
-                        <li><a href="blog-grid.html">News Grid</a></li>
-                        <li>
-                          <a href="blog-left-sidebar.html">News Left sidebar</a>
-                        </li>
-                        <li>
-                          <a href="blog-right-sidebar.html"
-                            >News Right sidebar</a
-                          >
-                        </li>
-                        <li><a href="blog-details.html">News details</a></li>
-                      </ul>
-                    </li>
-                    <li class="menu-icon">
-                      <a href="#">Pages</a>
-                      <ul class="mega-menu">
-                        <li>
-                          <a href="#">Inner Pages</a>
-                          <ul>
-                            <li><a href="portfolio.html">Gallery</a></li>
-                            <li><a href="portfolio-2.html">Gallery - 02</a></li>
-                            <li>
-                              <a href="portfolio-details.html"
-                                >Gallery Details</a
-                              >
-                            </li>
-                            <li><a href="team.html">Team</a></li>
-                            <li>
-                              <a href="team-details.html">Team Details</a>
-                            </li>
-                            <li><a href="faq.html">FAQ</a></li>
-                          </ul>
-                        </li>
-                        <li>
-                          <a href="#">Inner Pages</a>
-                          <ul>
-                            <li><a href="history.html">History</a></li>
-                            <li><a href="contact.html">Appointment</a></li>
-                            <li>
-                              <a href="locations.html">Google Map Locations</a>
-                            </li>
-                            <li><a href="404.html">404</a></li>
-                            <li><a href="contact.html">Contact</a></li>
-                            <li><a href="coming-soon.html">Coming Soon</a></li>
-                          </ul>
-                        </li>
-                        <li>
-                          <a href="#">Shop Pages</a>
-                          <ul>
-                            <li><a href="shop.html">Shop</a></li>
-                            <li>
-                              <a href="shop-left-sidebar.html"
-                                >Shop Left sidebar</a
-                              >
-                            </li>
-                            <li>
-                              <a href="shop-right-sidebar.html"
-                                >Shop right sidebar</a
-                              >
-                            </li>
-                            <li><a href="shop-grid.html">Shop Grid</a></li>
-                            <li>
-                              <a href="product-details.html">Shop details </a>
-                            </li>
-                            <li><a href="cart.html">Cart</a></li>
-                          </ul>
-                        </li>
-                        <li>
-                          <a href="shop.html"
-                            ><img src="img/banner/menu-banner-1.png" alt="#"
-                          /></a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li class="special-link">
-                      <a href="contact.html">GET A QUOTE</a>
+                      <router-link :to="{ name: 'Blog' }">Blog</router-link>
                     </li>
                   </ul>
                 </div>
@@ -319,12 +111,7 @@
               </div>
               <div class="header-search-1-form">
                 <form id="#" method="get" action="#">
-                  <input
-                    type="text"
-                    name="search"
-                    value=""
-                    placeholder="Search here..."
-                  />
+                  <input type="text" name="search" value="" placeholder="Search here..." />
                   <button type="submit">
                     <span><i class="icon-search"></i></span>
                   </button>
@@ -336,37 +123,46 @@
               <ul>
                 <li>
                   <a href="#"><i class="icon-user"></i></a>
-                  <ul>
-                    <li><a href="login.html">Sign in</a></li>
-                    <li><a href="register.html">Register</a></li>
-                    <li><a href="account.html">My Account</a></li>
-                    <li><a href="wishlist.html">Wishlist</a></li>
+                  <ul v-if="login">
+                    <!-- <li><router-link :to="{name:'Login'}">Đăng Nhập</router-link></li>
+                    <li><router-link :to="{name:'Register'}">Đăng Ký</router-link></li> -->
+                    <li>
+                      <router-link :to="{ name: 'MyAccount' }">Tài khoản của tôi</router-link>
+                    </li>
+                    <li><a href="#">Yêu Thích</a></li>
+                  </ul>
+                  <ul v-else>
+                    <li>
+                      <router-link :to="{ name: 'Login' }">Đăng Nhập</router-link>
+                    </li>
+                    <li>
+                      <router-link :to="{ name: 'Register' }">Đăng Ký</router-link>
+                    </li>
+                    <li>
+                      <router-link :to="{ name: 'MyAccount' }">Tài khoản của tôi</router-link>
+                    </li>
+                    <li><a href="#">Yêu Thích</a></li>
                   </ul>
                 </li>
               </ul>
             </div>
             <!-- mini-cart -->
             <div class="mini-cart-icon">
-              <a href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle">
+              <router-link :to="{ name: 'Cart' }" class="ltn__utilize-toggle">
                 <i class="icon-shopping-cart"></i>
-                <sup>2</sup>
-              </a>
+                <sup>{{ count }}</sup>
+              </router-link>
             </div>
             <!-- mini-cart -->
             <!-- Mobile Menu Button -->
             <div class="mobile-menu-toggle d-xl-none">
               <a href="#ltn__utilize-mobile-menu" class="ltn__utilize-toggle">
                 <svg viewBox="0 0 800 600">
-                  <path
-                    d="M300,220 C300,220 520,220 540,220 C740,220 640,540 520,420 C440,340 300,200 300,200"
-                    id="top"
-                  ></path>
+                  <path d="M300,220 C300,220 520,220 540,220 C740,220 640,540 520,420 C440,340 300,200 300,200"
+                    id="top"></path>
                   <path d="M300,320 L540,320" id="middle"></path>
-                  <path
-                    d="M300,210 C300,210 520,210 540,210 C740,210 640,530 520,410 C440,330 300,190 300,190"
-                    id="bottom"
-                    transform="translate(480, 320) scale(1, -1) translate(-480, -318) "
-                  ></path>
+                  <path d="M300,210 C300,210 520,210 540,210 C740,210 640,530 520,410 C440,330 300,190 300,190"
+                    id="bottom" transform="translate(480, 320) scale(1, -1) translate(-480, -318) "></path>
                 </svg>
               </a>
             </div>
@@ -377,4 +173,84 @@
     <!-- ltn__header-middle-area end -->
   </header>
   <!-- HEADER AREA END -->
+  <!-- Utilize Cart Menu Start -->
+  <!-- <div id="ltn__utilize-cart-menu" class="ltn__utilize ltn__utilize-cart-menu">
+        <div class="ltn__utilize-menu-inner ltn__scrollbar">
+            <div class="ltn__utilize-menu-head">
+                <span class="ltn__utilize-menu-title">Cart</span>
+                <button class="ltn__utilize-close">×</button>
+            </div>
+            <div class="mini-cart-product-area ltn__scrollbar">
+                <div class="mini-cart-item clearfix">
+                    <div class="mini-cart-img">
+                        <a href="#"><img src="img/product/1.png" alt="Image"></a>
+                        <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
+                    </div>
+                    <div class="mini-cart-info">
+                        <h6><a href="#">Red Hot Tomato</a></h6>
+                        <span class="mini-cart-quantity">1 x $65.00</span>
+                    </div>
+                </div>
+                <div class="mini-cart-item clearfix">
+                    <div class="mini-cart-img">
+                        <a href="#"><img src="img/product/2.png" alt="Image"></a>
+                        <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
+                    </div>
+                    <div class="mini-cart-info">
+                        <h6><a href="#">Vegetables Juices</a></h6>
+                        <span class="mini-cart-quantity">1 x $85.00</span>
+                    </div>
+                </div>
+                <div class="mini-cart-item clearfix">
+                    <div class="mini-cart-img">
+                        <a href="#"><img src="img/product/3.png" alt="Image"></a>
+                        <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
+                    </div>
+                    <div class="mini-cart-info">
+                        <h6><a href="#">Orange Sliced Mix</a></h6>
+                        <span class="mini-cart-quantity">1 x $92.00</span>
+                    </div>
+                </div>
+                <div class="mini-cart-item clearfix">
+                    <div class="mini-cart-img">
+                        <a href="#"><img src="img/product/4.png" alt="Image"></a>
+                        <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
+                    </div>
+                    <div class="mini-cart-info">
+                        <h6><a href="#">Orange Fresh Juice</a></h6>
+                        <span class="mini-cart-quantity">1 x $68.00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="mini-cart-footer">
+                <div class="mini-cart-sub-total">
+                    <h5>Subtotal: <span>$310.00</span></h5>
+                </div>
+                <div class="btn-wrapper">
+                    <a href="cart.html" class="theme-btn-1 btn btn-effect-1">View Cart</a>
+                    <a href="cart.html" class="theme-btn-2 btn btn-effect-2">Checkout</a>
+                </div>
+                <p>Free Shipping on All Orders Over $100!</p>
+            </div>
+
+        </div>
+    </div> -->
+  <!-- Utilize Cart Menu End -->
 </template>
+<script>
+import store from '@/store';
+import { ref } from '@vue/reactivity';
+export default {
+  setup() {
+    let login = JSON.parse(localStorage.getItem("login"));
+    let count = 0;
+    let user_name = ref("");
+    if (login && store.state.cart) {
+      user_name.value = login.name;
+      count = store.state.cart.length;
+      console.log(count, user_name.value);
+    }
+    return { count, user_name, login }
+  }
+}
+</script>
