@@ -57,7 +57,7 @@
         <div class="col-lg-6 col-md-6">
           <div class="ltn__banner-item">
             <div class="ltn__banner-img">
-              <a href="shop.html"><img src="img/banner/13.png" alt="Banner Image" /></a>
+              <a href="#"><img :src="'http://localhost:8080/uploads/2a100ad499d35b8d02c2.jpg'" alt="Banner Image" /></a>
             </div>
           </div>
         </div>
@@ -66,14 +66,16 @@
             <div class="col-lg-12">
               <div class="ltn__banner-item">
                 <div class="ltn__banner-img">
-                  <a href="shop.html"><img src="img/banner/14.png" alt="Banner Image" /></a>
+                  <a href="#"><img :src="'http://localhost:8080/uploads/1298d55c465b8405dd4a.jpg'"
+                      alt="Banner Image" /></a>
                 </div>
               </div>
             </div>
             <div class="col-lg-12">
               <div class="ltn__banner-item">
                 <div class="ltn__banner-img">
-                  <a href="shop.html"><img src="img/banner/15.png" alt="Banner Image" /></a>
+                  <a href="#"><img :src="'http://localhost:8080/uploads/8c688eae1da9dff786b8.jpg'"
+                      alt="Banner Image" /></a>
                 </div>
               </div>
             </div>
@@ -94,17 +96,10 @@
           </div>
           <div class="ltn__tab-menu ltn__tab-menu-2 ltn__tab-menu-top-right-- text-uppercase text-center">
             <div class="nav" v-for="(item) in category" :key="item">
-              <a class="show" data-toggle="tab" href="#" v-on:click="onCate(item.id)">{{ item.name }}</a>
-              <!-- <a data-toggle="tab" href="#liton_tab_3_2" class="">Vegetables</a> -->
-              <!-- <a data-toggle="tab" href="#liton_tab_3_3" class=""
-                >Dried Foods</a
-              >
-              <a data-toggle="tab" href="#liton_tab_3_4" class=""
-                >Bread & Cake</a
-              >
-              <a data-toggle="tab" href="#liton_tab_3_5" class=""
-                >Fish & Meat</a
-              > -->
+              <a data-toggle="tab" :class="{active: item.id === id
+              }" href="#" v-on:click="onCate(item.id)">{{
+                  item.name 
+              }} </a>
             </div>
           </div>
 
@@ -118,12 +113,14 @@
                     <div class="product-hover-action">
                       <ul>
                         <li>
-                          <a href="#" title="Quick View" data-toggle="modal" data-target="#quick_view_modal">
+                          <router-link :to="{ name: 'Detail', params: { id: item.id } }" title="Quick View"
+                            data-toggle="modal" data-target="#quick_view_modal">
                             <i class="far fa-eye"></i>
-                          </a>
+                          </router-link>
                         </li>
                         <li>
-                          <a   title="Add to Cart" data-toggle="modal" data-target="#add_to_cart_modal" v-on:click.stop.prevent="onCart(item.id)">
+                          <a title="Add to Cart" data-toggle="modal" data-target="#add_to_cart_modal"
+                            v-on:click.stop.prevent="onCart(item.id)">
                             <i class="fas fa-shopping-cart"></i>
                           </a>
                         </li>
@@ -134,7 +131,7 @@
                       </ul>
                     </div>
                   </div>
-                  <div class="product-info" style="width: 258px; height: 166px">
+                  <div class="product-info" style="width: 258px; height: 124px">
                     <div class="product-ratting">
                       <ul>
                         <li>
@@ -161,11 +158,11 @@
                       <a href="#">{{ item.name }}</a>
                     </h2>
                     <div class="product-price" v-if="item.salePrice == 0">
-                      <span>{{ formatPrice(item.price) }}đ</span>
+                      <span>{{ formatPrice(item.price) }}</span>
                     </div>
                     <div class="product-price" v-else>
-                      <span>{{ formatPrice(item.salePrice) }}đ</span>
-                      <del>{{ formatPrice(item.price) }}đ</del>
+                      <span>{{ formatPrice(item.salePrice) }}</span>
+                      <del>{{ formatPrice(item.price) }}</del>
                     </div>
                   </div>
                 </div>
@@ -181,54 +178,38 @@
                     <div class="product-hover-action">
                       <ul>
                         <li>
-                          <a href="#" title="Quick View" data-toggle="modal" data-target="#quick_view_modal">
+                          <router-link :to="{ name: 'Detail', params: { id: item.id } }" title="Quick View"
+                            data-toggle="modal" data-target="#quick_view_modal">
                             <i class="far fa-eye"></i>
-                          </a>
+                          </router-link>
                         </li>
                         <li>
-                          <a  href="#" title="Add to Cart" data-toggle="modal" data-target="#add_to_cart_modal" v-on:click.stop.prevent="onCart(item.id)">
+                          <a href="#" title="Add to Cart" data-toggle="modal" data-target="#add_to_cart_modal"
+                            v-on:click.stop.prevent="onCart(item.id)">
                             <i class="fas fa-shopping-cart"></i>
                           </a>
                         </li>
                         <li>
-                          <a href="#" title="Wishlist" data-toggle="modal" data-target="#liton_wishlist_modal">
-                            <i class="far fa-heart"></i></a>
+                          <a title="Wishlist"
+                            v-on:click.stop.prevent="!this.ListFav.includes(item.id) ? onFav(item) : delFav(item)">
+                            <i v-bind:class="!this.ListFav.includes(item.id) ? 'far fa-heart' : 'fas fa-heart'"
+                              v-bind:style="!this.ListFav.includes(item.id) ? { cursor: 'pointer' } : [{ color: 'red' }, { cursor: 'pointer' }]"></i></a>
+
                         </li>
                       </ul>
                     </div>
                   </div>
-                  <div class="product-info" style="width: 258px; height: 166px">
-                    <div class="product-ratting">
-                      <ul>
-                        <li>
-                          <a href="#"><i class="fas fa-star"></i></a>
-                        </li>
-                        <li>
-                          <a href="#"><i class="fas fa-star"></i></a>
-                        </li>
-                        <li>
-                          <a href="#"><i class="fas fa-star"></i></a>
-                        </li>
-                        <li>
-                          <a href="#"><i class="fas fa-star-half-alt"></i></a>
-                        </li>
-                        <li>
-                          <a href="#"><i class="far fa-star"></i></a>
-                        </li>
-                        <li class="review-total">
-                          <a href="#"> (24)</a>
-                        </li>
-                      </ul>
-                    </div>
+                  <div class="product-info" style="width: 258px; height: 124px">
+
                     <h2 class="product-title">
                       <a href="#">{{ item.name }}</a>
                     </h2>
                     <div class="product-price" v-if="item.salePrice == 0">
-                      <span>{{ formatPrice(item.price) }}đ</span>
+                      <span>{{ formatPrice(item.price) }}</span>
                     </div>
                     <div class="product-price" v-else>
-                      <span>{{ formatPrice(item.salePrice) }}đ</span>
-                      <del>{{ formatPrice(item.price) }}đ</del>
+                      <span>{{ formatPrice(item.salePrice) }}</span>
+                      <del>{{ formatPrice(item.price) }}</del>
                     </div>
                   </div>
                 </div>
@@ -252,14 +233,15 @@
         <div class="col-lg-7">
           <div class="call-to-action-inner call-to-action-inner-4 text-color-white--- text-center---">
             <div class="section-title-area ltn__section-title-2 text-center---">
-              <h6 class="ltn__secondary-color">Ưu đãi hấp dẫn</h6>
+              <h6 class="ltn__secondary-color">Ưu ãi hấp dẫn</h6>
               <h1 class="section-title">
                 Đăng Ký Tài Khoản
               </h1>
             </div>
             <div class="ltn__countdown ltn__countdown-3 bg-white--" data-countdown="2021/12/28"></div>
             <div class="btn-wrapper animated">
-              <a href="#" class="theme-btn-1 btn btn-effect-1 text-uppercase">Đăng Ký</a>
+              <router-link :to="{ name: 'Register' }" class="theme-btn-1 btn btn-effect-1 text-uppercase">Đăng Ký
+              </router-link>
             </div>
           </div>
         </div>
@@ -285,54 +267,46 @@
             <div class="product-img">
               <a href="#"><img :src="'http://localhost:8080/uploads/' + item.images" alt="#"
                   style="width: 259px; height: 259px" /></a>
+              <div class="product-badge">
+                <ul>
+                  <li class="sale-badge">Khuyến Mãi</li>
+                </ul>
+              </div>
               <div class="product-hover-action">
                 <ul>
                   <li>
-                    <a href="#" title="Quick View" data-toggle="modal" data-target="#quick_view_modal">
+                    <router-link :to="{ name: 'Detail', params: { id: item.id } }" title="Quick View"
+                      data-toggle="modal" data-target="#quick_view_modal">
                       <i class="far fa-eye"></i>
-                    </a>
+                    </router-link>
                   </li>
                   <li>
-                    <a  title="Add to Cart" data-toggle="modal" data-target="#add_to_cart_modal" v-on:click.stop.prevent="onCart(item.id)">
+                    <a title="Add to Cart" data-toggle="modal" data-target="#add_to_cart_modal"
+                      v-on:click.stop.prevent="onCart(item.id)">
                       <i class="fas fa-shopping-cart"></i>
                     </a>
                   </li>
                   <li>
-                    <a href="#" title="Wishlist" data-toggle="modal" data-target="#liton_wishlist_modal">
-                      <i class="far fa-heart"></i></a>
+                    <a title="Wishlist"
+                      v-on:click.stop.prevent="!this.ListFav.includes(item.id) ? onFav(item) : delFav(item)">
+                      <i v-bind:class="!this.ListFav.includes(item.id) ? 'far fa-heart' : 'fas fa-heart'"
+                        v-bind:style="!this.ListFav.includes(item.id) ? { cursor: 'pointer' } : [{ color: 'red' }, { cursor: 'pointer' }]"></i></a>
+
                   </li>
                 </ul>
               </div>
             </div>
-            <div class="product-info" style="width: 258px; height: 166px">
-              <div class="product-ratting">
-                <ul>
-                  <li>
-                    <a href="#"><i class="fas fa-star"></i></a>
-                  </li>
-                  <li>
-                    <a href="#"><i class="fas fa-star"></i></a>
-                  </li>
-                  <li>
-                    <a href="#"><i class="fas fa-star"></i></a>
-                  </li>
-                  <li>
-                    <a href="#"><i class="fas fa-star-half-alt"></i></a>
-                  </li>
-                  <li>
-                    <a href="#"><i class="far fa-star"></i></a>
-                  </li>
-                </ul>
-              </div>
+            <div class="product-info" style="width: 258px; height: 124px">
+
               <h2 class="product-title">
                 <a href="#">{{ item.name }}</a>
               </h2>
               <div class="product-price" v-if="item.salePrice == 0">
-                <span>{{ formatPrice(item.price) }}đ</span>
+                <span>{{ formatPrice(item.price) }}</span>
               </div>
               <div class="product-price" v-else>
-                <span>{{ formatPrice(item.salePrice) }}đ</span>
-                <del>{{ formatPrice(item.price) }}đ</del>
+                <span>{{ formatPrice(item.salePrice) }}</span>
+                <del>{{ formatPrice(item.price) }}</del>
               </div>
             </div>
           </div>
@@ -349,8 +323,7 @@
         <div class="col-lg-12">
           <div class="ltn__video-bg-img ltn__video-popup-height-600 bg-overlay-black-10-- bg-image"
             data-bg="img/bg/15.jpg">
-            <a class="ltn__video-icon-2 ltn__video-icon-2-border"
-              href="https://www.youtube.com/embed/B_0J3iBRK3A"
+            <a class="ltn__video-icon-2 ltn__video-icon-2-border" href="https://www.youtube.com/embed/B_0J3iBRK3A"
               data-rel="lightcase:myCollection">
               <i class="fa fa-play"></i>
             </a>
@@ -424,6 +397,10 @@
   <!-- BLOG AREA END -->
 </template>
 <style>
+.isActive {
+  color: #80b500;
+}
+
 .carousel__prev {
   border-radius: 0px;
   background-color: #fff;
@@ -550,11 +527,13 @@
   border-radius: 100%;
   display: none;
 }
+
 .ltn__blog-slider:hover .carousel__next {
   opacity: 1;
   visibility: visible;
   border-radius: 100%;
 }
+
 .ltn__blog-slider.carousel__next:hover {
   background-color: #80b500;
   border-color: #80b500;
@@ -576,6 +555,9 @@ import CategoryService from "../services/CategoryService";
 import { store } from "../store";
 import { computed, ref } from 'vue';
 import BlogService from "@/services/BlogService";
+import AccountService from "../services/AccountService";
+import FavoriteService from "@/services/FavoriteService";
+import router from "../router"
 export default {
   components: {
     Carousel,
@@ -584,10 +566,18 @@ export default {
   },
   data() {
     return {
+      id:-1,
       banner: null,
       category: null,
       blog: null,
+      productCate:null,
       // productSale: null
+      data: {
+        productId: null,
+        accountId: null,
+      },
+
+      ListFav: []
     }
 
   },
@@ -623,14 +613,102 @@ export default {
       .finally(() => {
         //Perform action in always
       });
+    const acc = JSON.parse(localStorage.getItem("account"));
+    if (acc != null) {
+      AccountService.get(acc.id)
+        .then((res) => {
+          this.data.accountId = res.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          //Perform action in always
+        });
+      FavoriteService.getAll()
+        .then((res) => {
+          for (let index = 0; index < res.data.length; index++) {
+            const element = res.data[index];
+            if (element.accountId.id == this.data.accountId.id) {
+              this.ListFav.push(element.productId.id);
+
+            }
+
+          }
+          console.log(this.ListFav);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          //Perform action in always
+        });
+    }
   },
 
   methods: {
-    formatPrice(value) {
-      let val = (value / 1).toFixed(2).replace('.', ',')
-      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+     onCate(id) {
+      this.id = id;
+      ProductService.getCat(id)
+        .then((response) => {
+          console.log(response.data);
+          this.productCate = response.data;
+          isActive = true
+        })
+        .catch((errors) => {
+          console.log(errors);
+        });
+         return this.id
     },
+    formatPrice(value) {
+      return new Intl.NumberFormat('en-US').format(value);
+    },
+    onFav(item) {
+      const acc = JSON.parse(localStorage.getItem("account"));
+      if (acc) {
+        this.data.productId = item;
+        FavoriteService.create(this.data).then((res) => {
+          this.ListFav.push(item.id);
 
+        }).catch((error) => {
+          console.log(error);
+        }).finally(() => { });
+      } else {
+        if (confirm("Hãy đăng nhập để thêm sản phẩm yêu thích!!!!")) {
+          router.push('login');
+        }
+      }
+
+    },
+    delFav(item) {
+      FavoriteService.getAll()
+        .then((res) => {
+          for (let index = 0; index < res.data.length; index++) {
+            const element = res.data[index];
+            if (element.accountId.id == this.data.accountId.id && element.productId.id == item.id) {
+              FavoriteService.delete(element.id).then((res) => {
+                this.ListFav.splice(
+                  this.ListFav.findIndex((e) => e == item.id),
+                  1
+                )
+              }).catch((err) => { }).finally(() => { });
+
+            }
+
+          }
+
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          //Perform action in always
+        });
+
+
+
+      // console.log(item);
+    }
 
   },
   setup() {
@@ -639,26 +717,16 @@ export default {
     store.dispatch('fetchProduct');
     const productSale = computed(() => store.state.productSale);
     store.dispatch('fetchProductSale');
-    const productCate = ref(null);
-    function onCate(id) {
-      console.log(id);
-      ProductService.getCat(id)
-        .then((response) => {
-          productCate.value = response.data;
-          console.log(productCate.value);
-        })
-        .catch((errors) => {
-          console.log(errors);
-        });
-    }
+    // const productCate = ref(null);
+    var isActive = false;
+    var itemId = -1;
+    
+    
     function onCart(itemId) {
-            console.log(itemId);
-            // if(user == null){
-            //     router.replace({ name: "Login" });
-            // }
-            store.commit('onCart', itemId);
-        }
-    return { product, productSale, onCate, productCate,onCart }
+      console.log(itemId);
+      store.commit('onCart', itemId);
+    }
+    return { product, productSale, onCart, isActive, itemId }
   }
 
 };

@@ -53,10 +53,13 @@
                                                     style="width:100px; height:100px"></a>
                                         </td>
                                         <td class="cart-product-info">
-                                            <h4><a href="#">{{ item.name }}</a></h4>
+                                            <h4><a href="#">{{ truncate(item.name,15) }}</a></h4>
                                         </td>
-                                        <td class="cart-product-price" v-if="item.salePrice == 0">{{ item.price }}</td>
-                                        <td class="cart-product-price" v-if="item.salePrice > 0">{{ item.salePrice }}
+                                        <td class="cart-product-price" v-if="item.salePrice == 0">{{
+                                                formatPrice(item.price)
+                                        }}</td>
+                                        <td class="cart-product-price" v-if="item.salePrice > 0">
+                                            {{ formatPrice(item.salePrice) }}
                                         </td>
                                         <td class="cart-product-quantity">
                                             <div class="cart-plus-minus">
@@ -71,9 +74,9 @@
                                             </div>
                                         </td>
                                         <td class="cart-product-subtotal" v-if="item.salePrice == 0">
-                                            {{ formatPrice(item.quantity * item.price) }}</td>
+                                            {{ formatPrice(item.quantity * item.price) }} </td>
                                         <td class="cart-product-subtotal" v-if="item.salePrice > 0">
-                                            {{ formatPrice(item.quantity * item.salePrice) }}</td>
+                                            {{ formatPrice(item.quantity * item.salePrice) }} </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -84,34 +87,35 @@
                                 <tbody v-if="cart">
                                     <tr>
                                         <td>Tổng phụ giỏ hàng</td>
-                                        <td>{{ formatPrice(sum) }}đ</td>
+                                        <td>{{ formatPrice(sum) }} </td>
                                     </tr>
                                     <tr>
                                         <td>Phí Ship</td>
-                                        <td>0đ</td>
+                                        <td>0</td>
                                     </tr>
                                     <tr>
                                         <td><strong>Thành Tiền</strong></td>
-                                        <td><strong>{{ formatPrice(sum) }}đ</strong></td>
+                                        <td><strong>{{ formatPrice(sum) }} </strong></td>
                                     </tr>
                                 </tbody>
                                 <tbody v-else>
                                     <tr>
                                         <td>Tổng phụ giỏ hàng</td>
-                                        <td>0đ</td>
+                                        <td>0 </td>
                                     </tr>
                                     <tr>
                                         <td>Phí Ship</td>
-                                        <td>0đ</td>
+                                        <td>0 </td>
                                     </tr>
                                     <tr>
                                         <td><strong>Thành Tiền</strong></td>
-                                        <td><strong>0đ</strong></td>
+                                        <td><strong>0 </strong></td>
                                     </tr>
                                 </tbody>
                             </table>
                             <div class="btn-wrapper text-right">
-                                <a href="#" class="theme-btn-1 btn btn-effect-1">Tiến hành kiểm tra</a>
+                                <a class="theme-btn-1 btn btn-effect-1" @click.prevent="onCheckOut()">Tiến hành
+                                    kiểm tra</a>
                             </div>
                         </div>
                     </div>
@@ -133,19 +137,20 @@
 </template>
 <script>
 import { ref } from '@vue/reactivity';
-import { store } from "../store";
+import store from "../store";
+import router from "../router";
+import { computed } from '@vue/runtime-core';
 export default {
     setup() {
-        const cart = store.state.cart;
-        console.log(cart);
+        let cart = store.state.cart;
         function onCount(proId) {
             store.commit('onCount', proId);
         }
         function onCountMinus(proId) {
             store.commit('onCountMinus', proId);
         }
-        const sum = store.getters.total;
-        console.log(sum);
+        // let sum = store.getters.total;
+        // console.log(sum);
         function removeFromCart(item) {
             store.commit('removeFromCart', item);
         };
@@ -157,12 +162,32 @@ export default {
             }
         }
         let login = JSON.parse(localStorage.getItem("login"));
-        return { cart, sum, onCount, onCountMinus, removeFromCart, login,names }
+        function onCheckOut() {
+            if (cart && login.name == names.value) {
+                router.push("/checkout");
+            } else {
+                alert("Hãy Thêm Sản Phẩm Vào Giỏ Hàng")
+            }
+        }
+
+
+        return { cart, onCount, onCountMinus, removeFromCart, login, names, onCheckOut }
+    },
+    computed: {
+        sum() {
+            return store.getters.total;
+        },
     },
     methods: {
         formatPrice(value) {
-            let val = (value).toFixed(2).replace('.', ',')
-            return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+            return new Intl.NumberFormat('en-US').format(value);
+        },
+        truncate(value, length) {
+            if (value.length > length) {
+                return value.substring(0, length) + "...";
+            } else {
+                return value;
+            }
         }
     }
 }

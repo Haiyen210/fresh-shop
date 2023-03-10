@@ -27,7 +27,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-                    <div class="ltn__blog-list-wrap" v-for="item in blog" :key="item">
+                    <div class="ltn__blog-list-wrap" v-for="item in paginated" :key="item">
                         <div class="ltn__blog-item ltn__blog-item-5">
                             <div class="ltn__blog-img">
                                 <a href="#"><img :src="'http://localhost:8080/uploads/' + item.images" alt="Image"></a>
@@ -51,7 +51,8 @@
                                 <p>{{ item.description.slice(0, 200) }}...</p>
                                 <div class="ltn__blog-meta-btn">
                                     <div class="ltn__blog-btn">
-                                        <router-link  :to="{ name: 'BlogDetail', params: { id: item.id } }"><i class="fas fa-arrow-right"></i>Đọc Thêm</router-link>
+                                        <router-link :to="{ name: 'BlogDetail', params: { id: item.id } }"><i
+                                                class="fas fa-arrow-right"></i>Đọc Thêm</router-link>
                                     </div>
                                 </div>
                             </div>
@@ -60,15 +61,12 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="ltn__pagination-area text-center">
-                                <div class="ltn__pagination">
+                                <div class="ltn__pagination" v-if="totalPaginate > 1">
                                     <ul>
-                                        <li><a href="#"><i class="fas fa-angle-double-left"></i></a></li>
-                                        <li><a href="#">1</a></li>
-                                        <li class="active"><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">...</a></li>
-                                        <li><a href="#">10</a></li>
-                                        <li><a href="#"><i class="fas fa-angle-double-right"></i></a></li>
+                                        <li><a href="#" @click="prev"><i class="fas fa-angle-double-left"></i></a></li>
+                                        <li v-for="item in totalPaginate" :key="item"  v-bind:class="{ isActive: (item  === current), 'text-dark': isActive == false }"><a href="#"
+                                                v-on:click.prevent="onCurrent(item)">{{ item }}</a></li>
+                                        <li><a href="#" @click="next"><i class="fas fa-angle-double-right"></i></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -110,7 +108,7 @@
                                 </li>
                             </ul>
                         </div>
-                      
+
                         <!-- Social Media Widget -->
                         <div class="widget ltn__social-media-widget">
                             <h4 class="ltn__widget-title ltn__widget-title-border">Không bao giờ bỏ lỡ tin tức</h4>
@@ -160,12 +158,20 @@
     </div>
     <!-- BLOG AREA END -->
 </template>
+<style>
+.isActive {
+    background-color: #80b500;
+    color: #ffff;
+}</style>
 <script>
 import BlogService from "@/services/BlogService";
 export default {
     data() {
         return {
             blog: null,
+            current: 1,
+            pageSize: 3,
+            isActive:false
         }
     },
     created() {
@@ -180,6 +186,52 @@ export default {
                 //Perform action in always
             });
     },
+    computed: {
+        resultCount() {
+            return this.blog && this.blog.length
+        },
+        indexStart() {
+            return (this.current - 1) * this.pageSize;
+        },
+        indexEnd() {
+            return this.indexStart + this.pageSize;
+        },
+        totalPaginate() {
+            if (this.resultCount % this.pageSize == 0) {
+                return Math.floor(this.resultCount / this.pageSize);
+            } else {
+                return Math.floor(this.resultCount / this.pageSize) + 1;
+            }
+        },
+        paginated() {
+            console.log(this.resultCount);
+            if (this.resultCount > this.pageSize) {
+                return this.blog.slice(this.indexStart, this.indexEnd, this.totalPaginate);
+            }
+            else {
+                return this.blog;
+            }
+        }
+    },
+    methods:{
+         onCurrent(item) {
+           this.isActive = true
+            return this.current = item;
+        },
+
+        prev() {
+            this.current--;
+            if (this.current == 0) {
+                return this.current = 1;
+            }
+        },
+        next() {
+            this.current++;
+            if (this.current > this.totalPaginate) {
+                return this.current = this.totalPaginate;
+            }
+        },
+    }
 
 }
 </script>

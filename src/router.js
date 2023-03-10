@@ -51,12 +51,48 @@ const routes = [{
         path: "/myAccount",
         name: "MyAccount",
         component: () =>
-            import ( /*webpackChunkName: "MyAccount" */ "./view/myAccount"),
+            import ( /*webpackChunkName: "myAccount" */ "./view/myAccount"),
+    },
+    {
+        path: "/checkout",
+        name: "CheckOut",
+        component: () =>
+            import ( /*webpackChunkName: "checkout" */ "./view/checkout"),
+    },
+    {
+        path: "/favorite",
+        name: "Favorite",
+        component: () =>
+            import ( /*webpackChunkName: "Favorite" */ "./view/favorite"),
+    },
+    {
+        path: "/checkout_success",
+        name: "CheckOut_Success",
+        component: () =>
+            import ( /*webpackChunkName: "checkout_success" */ "./view/checkout_success"),
+    },
+    {
+        path: "/email-confirm",
+        name: "Email",
+        component: () =>
+            import ( /*webpackChunkName: "email" */ "./view/email"),
+    },
+    {
+        path: "/:pathMatch(.*)*",
+        name: "NotFound",
+        component: () =>
+            import ( /*webpackChunkName: "notFound" */ "./view/notFound"),
     },
 ];
 const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
     routes,
 });
-
+// router.beforeEach(function(transition) {
+//     if (transition.to.path === '/*') {
+//         window.location.href = '/404'
+//     } else {
+//         transition.next()
+//     }
+// });
 export default router;

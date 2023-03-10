@@ -79,8 +79,9 @@ go
 		Address nvarchar(150) not null,
 		TotalQuantity int,
 		TotalPrice float,
-		Status bit default 1,
+		Status tinyint default 1,
 		AccountID int foreign key references Account(ID),
+		note ntext null,
 		CreatedDate date DEFAULT GETDATE(),
 		ModiredDate date DEFAULT GETDATE()
 	);

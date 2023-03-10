@@ -13,7 +13,9 @@
                         </div>
                         <div class="ltn__breadcrumb-list">
                             <ul>
-                                <li><a href="index-2.html">Trang Chủ</a></li>
+                                <li>
+                                    <router-link :to="{ name: 'Home' }">Trang chủ</router-link>
+                                </li>
                                 <li>Chi Tiết Sản Phẩm</li>
                             </ul>
                         </div>
@@ -47,21 +49,17 @@
                                 <div class="modal-product-info shop-details-info pl-0">
                                     <div class="product-ratting">
                                         <ul>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                            <li><a href="#"><i class="far fa-star"></i></a></li>
-                                            <li class="review-total"> <a href="#"> ( 95 Reviews )</a></li>
+                                            <star-rating :inline="true" :star-size="20" :read-only="true"
+                                                :show-rating="false" :rating="vote"></star-rating>
                                         </ul>
                                     </div>
                                     <h3>{{ prod.name }}</h3>
                                     <div class="product-price" v-if="prod.salePrice == 0">
-                                        <span>{{ formatPrice(prod.price) }}đ</span>
+                                        <span>{{ formatPrice(prod.price) }}</span>
                                     </div>
                                     <div class="product-price" v-else>
-                                        <span>{{ formatPrice(prod.salePrice) }}đ</span>
-                                        <del>{{ formatPrice(prod.price) }}đ</del>
+                                        <span>{{ formatPrice(prod.salePrice) }}</span>
+                                        <del>{{ formatPrice(prod.price) }}</del>
                                     </div>
                                     <div class="modal-product-meta ltn__product-details-menu-1">
                                         <ul>
@@ -77,19 +75,17 @@
                                         <ul>
                                             <li>
                                                 <div class="cart-plus-minus">
-                                                    <input type="button" value="-" name="qtybutton"
-                                                        class="cart-plus-minus-box" v-on:click="onCountMinus()"
-                                                        style="border:none">
-                                                    <input type="text" v-bind:value="`${count}`" name="qtybutton"
+                                                    <input type="button" value="-" class="cart-plus-minus-box"
+                                                        v-on:click="onCountMinus()" style="border:none">
+                                                    <input type="text" v-bind:value="`${count}`"
                                                         class="cart-plus-minus-box">
-                                                    <input type="button" value="+" name="qtybutton"
-                                                        class="cart-plus-minus-box" v-on:click="onCount()"
-                                                        style="border:none">
+                                                    <input type="button" value="+" class="cart-plus-minus-box"
+                                                        v-on:click="onCount()" style="border:none">
                                                 </div>
                                             </li>
                                             <li>
                                                 <a href="#" class="theme-btn-1 btn btn-effect-1" title="Add to Cart"
-                                                    data-toggle="modal" data-target="#add_to_cart_modal">
+                                                    data-toggle="modal" data-target="#add_to_cart_modal" v-on:click.stop.prevent="onCart(prod.id)">
                                                     <i class="fas fa-shopping-cart"></i>
                                                     <span>Thêm Vào Giỏ Hàng</span>
                                                 </a>
@@ -99,11 +95,15 @@
                                     <div class="ltn__product-details-menu-3">
                                         <ul>
                                             <li>
-                                                <a href="#" class="" title="Wishlist" data-toggle="modal"
-                                                    data-target="#liton_wishlist_modal">
-                                                    <i class="far fa-heart"></i>
-                                                    <span>Thêm Vào Yêu Thích</span>
+                                                <a title="Wishlist"
+                                                    v-on:click.stop.prevent="!this.ListFav.includes(prod.id) ? onFav(prod) : delFav(prod)">
+                                                    <i v-bind:class="!this.ListFav.includes(prod.id) ? 'far fa-heart' : 'fas fa-heart'"
+                                                        v-bind:style="!this.ListFav.includes(prod.id) ? { cursor: 'pointer' } : [{ color: 'red' }, { cursor: 'pointer' }]"></i>
+                                                    <span v-if="!this.ListFav.includes(prod.id)">Thêm vào yêu
+                                                        thích</span>
+                                                    <span v-else>Đã yêu thích</span>
                                                 </a>
+
                                             </li>
                                         </ul>
                                     </div>
@@ -132,7 +132,7 @@
                         <div class="ltn__shop-details-tab-menu">
                             <div class="nav">
                                 <a class="active show" data-toggle="tab" href="#liton_tab_details_1_1">Mô tả</a>
-                                <a data-toggle="tab" href="#liton_tab_details_1_2" class="">Nhận Xét</a>
+                                <a data-toggle="tab" href="#liton_tab_details_1_2" class="">Đáng giá</a>
                             </div>
                         </div>
                         <div class="tab-content">
@@ -146,131 +146,50 @@
                             <div class="tab-pane fade" id="liton_tab_details_1_2">
                                 <div class="ltn__shop-details-tab-content-inner">
                                     <h4 class="title-2">Phản hồi khách hàng</h4>
-                                    <div class="product-ratting">
-                                        <ul>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                            <li><a href="#"><i class="far fa-star"></i></a></li>
-                                            <li class="review-total"> <a href="#"> ( 95 Reviews )</a></li>
-                                        </ul>
-                                    </div>
-                                    <hr>
-                                    <!-- comment-area -->
-                                    <!-- <div class="ltn__comment-area mb-30">
-                                        <div class="ltn__comment-inner">
+                                    <div v-if="listRatings">
+                                        <div class="product-ratting" v-for="comment in listRatings"
+                                            :key="comment">
+                                            <h4>{{ comment.accountId.name }}</h4>
                                             <ul>
-                                                <li>
-                                                    <div class="ltn__comment-item clearfix">
-                                                        <div class="ltn__commenter-img">
-                                                            <img src="img/testimonial/1.jpg" alt="Image">
-                                                        </div>
-                                                        <div class="ltn__commenter-comment">
-                                                            <h6><a href="#">Adam Smit</a></h6>
-                                                            <div class="product-ratting">
-                                                                <ul>
-                                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                                    <li><a href="#"><i
-                                                                                class="fas fa-star-half-alt"></i></a>
-                                                                    </li>
-                                                                    <li><a href="#"><i class="far fa-star"></i></a></li>
-                                                                </ul>
-                                                            </div>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                                Doloribus, omnis fugit corporis iste magnam ratione.</p>
-                                                            <span class="ltn__comment-reply-btn">September 3,
-                                                                2020</span>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="ltn__comment-item clearfix">
-                                                        <div class="ltn__commenter-img">
-                                                            <img src="img/testimonial/3.jpg" alt="Image">
-                                                        </div>
-                                                        <div class="ltn__commenter-comment">
-                                                            <h6><a href="#">Adam Smit</a></h6>
-                                                            <div class="product-ratting">
-                                                                <ul>
-                                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                                    <li><a href="#"><i
-                                                                                class="fas fa-star-half-alt"></i></a>
-                                                                    </li>
-                                                                    <li><a href="#"><i class="far fa-star"></i></a></li>
-                                                                </ul>
-                                                            </div>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                                Doloribus, omnis fugit corporis iste magnam ratione.</p>
-                                                            <span class="ltn__comment-reply-btn">September 2,
-                                                                2020</span>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="ltn__comment-item clearfix">
-                                                        <div class="ltn__commenter-img">
-                                                            <img src="img/testimonial/2.jpg" alt="Image">
-                                                        </div>
-                                                        <div class="ltn__commenter-comment">
-                                                            <h6><a href="#">Adam Smit</a></h6>
-                                                            <div class="product-ratting">
-                                                                <ul>
-                                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                                    <li><a href="#"><i
-                                                                                class="fas fa-star-half-alt"></i></a>
-                                                                    </li>
-                                                                    <li><a href="#"><i class="far fa-star"></i></a></li>
-                                                                </ul>
-                                                            </div>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                                Doloribus, omnis fugit corporis iste magnam ratione.</p>
-                                                            <span class="ltn__comment-reply-btn">September 2,
-                                                                2020</span>
-                                                        </div>
-                                                    </div>
-                                                </li>
+                                                <star-rating :inline="true" :star-size="12" :read-only="true"
+                                                    :show-rating="false" :rating="comment.star"></star-rating>
                                             </ul>
+                                            <p>{{ comment.description }}</p>
                                         </div>
-                                    </div> -->
-                                    <!-- comment-reply -->
+                                    </div>
+                                    <div v-else>
+                                        <div class="product-ratting" v-for="comment in listRate.slice(0, 2)"
+                                            :key="comment">
+                                            <h4>{{ comment.accountId.name }}</h4>
+                                            <ul>
+                                                <star-rating :inline="true" :star-size="12" :read-only="true"
+                                                    :show-rating="false" :rating="comment.star"></star-rating>
+                                            </ul>
+                                            <p>{{ comment.description }}</p>
+                                        </div>
+                                    </div>
+
+                                    <hr>
+
                                     <div class="ltn__comment-reply-area ltn__form-box mb-30">
-                                        <form action="#">
-                                            <h4 class="title-2">Thêm nhận xét</h4>
+                                        <form method="post" v-on:submit.prevent="onSubmitForm">
+                                            <h4 class="title-2">Thêm đánh giá</h4>
                                             <div class="mb-30">
                                                 <div class="add-a-review">
                                                     <h6>Xếp hạng:</h6>
                                                     <div class="product-ratting">
-                                                        <ul>
-                                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                            <li><a href="#"><i class="fas fa-star-half-alt"></i></a>
-                                                            </li>
-                                                            <li><a href="#"><i class="far fa-star"></i></a></li>
-                                                        </ul>
+                                                        <star-rating v-model:rating="rating.star" :star-size="20"
+                                                            :increment="0.5" :show-rating="false"></star-rating>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="input-item input-item-textarea ltn__custom-icon">
-                                                <textarea placeholder="Nhập nhận xét của bạn...."></textarea>
+                                                <textarea placeholder="Nhập đánh giá của bạn...."
+                                                    v-model="rating.description"></textarea>
                                             </div>
-                                            <div class="input-item input-item-name ltn__custom-icon">
-                                                <input type="text" placeholder="Tên của bạn....">
-                                            </div>
-                                            <div class="input-item input-item-email ltn__custom-icon">
-                                                <input type="email" placeholder="Nhập email của bạn....">
-                                            </div>
-                                            <div class="input-item input-item-website ltn__custom-icon">
-                                                <input type="text" name="website" placeholder="Nhập trang web của bạn....">
-                                            </div>
-                                            <label class="mb-0"><input type="checkbox" name="agree"> Lưu tên tôi,
+
+                                            <label class="mb-0"><input type="checkbox" name="agree"
+                                                    v-model="rating.status" :value="true"> Lưu tên tôi,
                                                 email và trang web trong trình duyệt này cho lần tiếp theo tôi nhận
                                                 xét.</label>
                                             <div class="btn-wrapper">
@@ -308,50 +227,38 @@
                             <div class="product-img">
                                 <a href="#" tabindex="0"><img :src="'http://localhost:8080/uploads/' + item.images"
                                         style="width: 259px; height: 259px" alt="#"></a>
-                                <div class="product-badge">
-                                    <ul>
-                                        <li class="sale-badge">New</li>
-                                    </ul>
-                                </div>
+
                                 <div class="product-hover-action">
                                     <ul>
                                         <li>
-                                            <a href="#" title="Quick View" data-toggle="modal"
-                                                data-target="#quick_view_modal" tabindex="0">
+                                            <router-link :to="{ name: 'Detail', params: { id: item.id } }"
+                                                title="Quick View" data-toggle="modal" data-target="#quick_view_modal">
                                                 <i class="far fa-eye"></i>
-                                            </a>
+                                            </router-link>
                                         </li>
                                         <li>
-                                            <a href="#" title="Add to Cart" data-toggle="modal"
-                                                data-target="#add_to_cart_modal" tabindex="0">
+                                            <a href="#" v-on:click.stop.prevent="onCart(item.id)">
                                                 <i class="fas fa-shopping-cart"></i>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#" title="Wishlist" data-toggle="modal"
-                                                data-target="#liton_wishlist_modal" tabindex="0">
-                                                <i class="far fa-heart"></i></a>
+                                            <a title="Wishlist"
+                                                v-on:click.stop.prevent="!this.ListFav.includes(item.id) ? onFav(item) : delFav(item)">
+                                                <i v-bind:class="!this.ListFav.includes(item.id) ? 'far fa-heart' : 'fas fa-heart'"
+                                                    v-bind:style="!this.ListFav.includes(item.id) ? '' : { color: 'red' }"></i></a>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="product-info" style="width: 258px; height: 166px">
-                                <div class="product-ratting">
-                                    <ul>
-                                        <li><a href="#" tabindex="0"><i class="fas fa-star"></i></a></li>
-                                        <li><a href="#" tabindex="0"><i class="fas fa-star"></i></a></li>
-                                        <li><a href="#" tabindex="0"><i class="fas fa-star"></i></a></li>
-                                        <li><a href="#" tabindex="0"><i class="fas fa-star-half-alt"></i></a></li>
-                                        <li><a href="#" tabindex="0"><i class="far fa-star"></i></a></li>
-                                    </ul>
-                                </div>
+                            <div class="product-info" style="width: 258px; height: 124px">
+
                                 <h2 class="product-title"><a href="#" tabindex="0">{{ item.name }}</a></h2>
                                 <div class="product-price" v-if="item.salePrice == 0">
-                                    <span>{{ formatPrice(item.price) }}đ</span>
+                                    <span>{{ formatPrice(item.price) }}</span>
                                 </div>
                                 <div class="product-price" v-else>
-                                    <span>{{ formatPrice(item.salePrice) }}đ</span>
-                                    <del>{{ formatPrice(item.price) }}đ</del>
+                                    <span>{{ formatPrice(item.salePrice) }}</span>
+                                    <del>{{ formatPrice(item.price) }}</del>
                                 </div>
                             </div>
                         </div>
@@ -372,18 +279,44 @@
 }
 </style>
 <script>
+import AccountService from "../services/AccountService";
+import FavoriteService from "@/services/FavoriteService";
 import ProductService from '@/services/ProductService';
+import RatingService from '@/services/RatingService';
 import { Carousel, Navigation, Slide } from 'vue3-carousel';
 import { store } from "../store";
 import { computed } from 'vue';
 import 'vue3-carousel/dist/carousel.css';
+import StarRating from 'vue-star-rating'
+// import "../../public/css/style.css"
+// import "../../public/css/plugins.css"
+// import "../../public/css/responsive.css"
+// import "../../public/css/font-icons.css"
+
 export default {
     data() {
         return {
+            listRate: [],
             prod: null,
             product: null,
             catId: null,
-            count: 1
+            count: 1, data: {
+                productId: null,
+                accountId: null,
+            },
+            ListFav: [],
+            vote: null,
+            rating: {
+                id: null,
+                productId: "",
+                accountId: "",
+                star: "",
+                description: "",
+                status: "",
+            },
+            listRatings: []
+
+
         }
 
     },
@@ -391,8 +324,21 @@ export default {
         Carousel,
         Slide,
         Navigation,
+        StarRating
     },
     created() {
+        RatingService.getAll().then((res) => {
+            for (let index = 0; index < res.data.length; index++) {
+                const element = res.data[index];
+                if (element.productId.id == this.$route.params.id) {
+                    this.listRate.push(element);
+                }
+            }
+        }).catch(() => { }).finally(() => { });
+        RatingService.getStar(this.$route.params.id).then((res) => {
+            // console.log(res);
+            this.vote = res.data;
+        });
         ProductService.get(this.$route.params.id)
             .then((response) => {
                 this.prod = response.data;
@@ -400,8 +346,6 @@ export default {
                 ProductService.getCat(this.prod.categoryId.id)
                     .then((response) => {
                         this.product = response.data;
-                        console.log(this.catId);
-                        console.log(this.product)
                     })
                     .catch((errors) => {
                         console.log(errors);
@@ -410,11 +354,41 @@ export default {
             .catch((errors) => {
                 console.log(errors);
             });
+        const acc = JSON.parse(localStorage.getItem("account"));
+        if (acc != null) {
+            AccountService.get(acc.id)
+                .then((res) => {
+                    this.data.accountId = res.data;
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+                .finally(() => {
+                    //Perform action in always
+                });
+            FavoriteService.getAll()
+                .then((res) => {
+                    for (let index = 0; index < res.data.length; index++) {
+                        const element = res.data[index];
+                        if (element.accountId.id == this.data.accountId.id) {
+                            this.ListFav.push(element.productId.id);
+
+                        }
+
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+                .finally(() => {
+                    //Perform action in always
+                });
+        }
     },
+
     methods: {
         formatPrice(value) {
-            let val = (value / 1).toFixed(2).replace('.', ',')
-            return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+            return new Intl.NumberFormat('en-US').format(value);
         },
         onCount() {
             this.count += 1
@@ -425,6 +399,69 @@ export default {
             }
         },
 
+        onFav(item) {
+            const acc = JSON.parse(localStorage.getItem("account"));
+            if (acc) {
+                this.data.productId = item;
+                FavoriteService.create(this.data).then((res) => {
+                    this.ListFav.push(item.id);
+
+                }).catch((error) => {
+                    console.log(error);
+                }).finally(() => { });
+            } else {
+                if (confirm("Hãy đăng nhập để thêm sản phẩm yêu thích!!!!")) {
+                    router.push('login');
+                }
+            }
+
+        },
+        delFav(item) {
+            FavoriteService.getAll()
+                .then((res) => {
+                    for (let index = 0; index < res.data.length; index++) {
+                        const element = res.data[index];
+                        if (element.accountId.id == this.data.accountId.id && element.productId.id == item.id) {
+                            FavoriteService.delete(element.id).then((res) => {
+                                this.ListFav.splice(
+                                    this.ListFav.findIndex((e) => e == item.id),
+                                    1
+                                )
+                            }).catch((err) => { }).finally(() => { });
+
+                        }
+
+                    }
+
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+                .finally(() => {
+                    //Perform action in always
+                });
+
+        },
+        onSubmitForm() {
+            const acc = JSON.parse(localStorage.getItem("account"));
+            this.rating.productId = this.prod;
+            this.rating.accountId = acc;
+            if (acc) {
+                RatingService.create(this.rating).then((res) => {
+                    console.log(res.data);
+                    this.listRatings.push(res.data)
+                    this.rating.star = "",
+                    this.raitng.description = " ";
+
+                }).catch(() => { }).finally(() => { });
+            } else {
+                if (confirm("Hãy đăng nhập để nhận xét về sản phẩm này!!!!")) {
+                    router.push('login');
+                }
+            }
+
+        }
+
 
     },
     setup() {
@@ -433,9 +470,6 @@ export default {
         store.dispatch('fetchProduct');
         function onCart(itemId) {
             console.log(itemId);
-            // if(user == null){
-            //     router.replace({ name: "Login" });
-            // }
             store.commit('onCart', itemId);
         }
         return { product, onCart }
