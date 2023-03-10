@@ -107,7 +107,7 @@
                             <p>Bằng cách tạo một tài khoản, bạn đồng ý với:</p>
                             <p><a href="#">ĐIỀU KIỆN ĐIỀU KIỆN &nbsp; &nbsp;| &nbsp; &nbsp; CHÍNH SÁCH BẢO MẬT</a></p>
                             <div class="go-to-btn mt-50">
-                                <router-link :to="{name:'Login'}"> ĐÃ CÓ TÀI KHOẢN?</router-link>
+                                <router-link :to="{ name: 'Login' }"> ĐÃ CÓ TÀI KHOẢN?</router-link>
                             </div>
                         </div>
                     </div>
@@ -121,10 +121,11 @@
 import UploadService from "@/services/UploadService";
 import AccountService from "@/services/AccountService";
 import router from '@/router';
+import { createToast } from 'mosha-vue-toastify';
+import 'mosha-vue-toastify/dist/style.css'
 export default {
     data() {
         return {
-            user: null,
             message: "",
             url: null,
             currentImage: undefined,
@@ -139,7 +140,8 @@ export default {
                 birthday: "",
                 gender: "",
                 images: "",
-                role: 1
+                role: 1,
+                token: ""
             },
             random: null,
             nameError: {
@@ -194,17 +196,7 @@ export default {
 
     },
     mounted() {
-        AccountService.getAll()
-            .then((res) => {
-                this.user = res.data;
-                localStorage.setItem("checkRegister", JSON.stringify(res.data));
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-            .finally(() => {
-                // console.log(this.user);
-            })
+
     },
     methods: {
         onSubmitForm() {
@@ -261,7 +253,7 @@ export default {
                     this.emailError.status = true
             }
             else if (this.register.email == check_email) {
-                this.emailError.text = "Email  này đã tồn tại",
+                this.emailError.text = "Email này đã tồn tại",
                     this.emailError.status = true
             }
             else if (regex.test(this.register.email)) {
@@ -387,7 +379,14 @@ export default {
                     .finally(() => {
                         //Perform action in always
                     });
-                    router.push('/login');
+                createToast({
+                    title: 'Thành công',
+                    description: 'Đăng kí tài khoản thành công!!!!',
+                    type: 'success',
+                    timeout: 1000,
+
+                })
+                router.push('/login');
             }
 
         },

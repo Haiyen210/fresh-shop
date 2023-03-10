@@ -1,6 +1,6 @@
 <template>
   <!-- FEATURE AREA START ( Feature - 3) -->
-  <div class="ltn__feature-area before-bg-bottom-2 mb--30--- plr--5">
+  <div class="ltn__feature-area before-bg-bottom-2 mb--30--- plr--5" style="z-index: -1;">
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-12">
@@ -122,55 +122,55 @@
           </div>
           <div class="col-xl-2 col-md-6 col-sm-6 col-12">
             <div class="footer-widget footer-menu-widget clearfix">
-              <h4 class="footer-title">Company</h4>
+              <h4 class="footer-title"> Công ty </h4>
               <div class="footer-menu">
                 <ul>
-                  <li><a href="#">About</a></li>
-                  <li><a href="#">Blog</a></li>
-                  <li><a href="#">All Products</a></li>
-                  <li><a href="#">Locations Map</a></li>
-                  <li><a href="#">FAQ</a></li>
-                  <li><a href="#">Contact us</a></li>
+                  <li> <a href="#"> Giới thiệu </a> </li>
+                  <li> <a href="#"> Blog </a> </li>
+                  <li> <a href="#"> Tất cả các sản phẩm </a> </li>
+                  <li> <a href="#"> Bản đồ Vị trí </a> </li>
+                  <li> <a href="#"> Câu hỏi thường gặp </a> </li>
+                  <li> <a href="#"> Liên hệ với chúng tôi </a> </li>
                 </ul>
               </div>
             </div>
           </div>
           <div class="col-xl-2 col-md-6 col-sm-6 col-12">
             <div class="footer-widget footer-menu-widget clearfix">
-              <h4 class="footer-title">Services.</h4>
+              <h4 class="footer-title"> Dịch vụ. </h4>
               <div class="footer-menu">
                 <ul>
-                  <li><a href="#">Order tracking</a></li>
-                  <li><a href="#">Wish List</a></li>
-                  <li><a href="#">Login</a></li>
-                  <li><a href="#">My account</a></li>
-                  <li><a href="#">Terms & Conditions</a></li>
-                  <li><a href="#">Promotional Offers</a></li>
+                  <li> <a href="#"> Theo dõi đơn hàng </a> </li>
+                  <li> <a href="#"> Danh sách Yêu thích </a> </li>
+                  <li> <a href="#"> Đăng nhập </a> </li>
+                  <li> <a href="#"> Tài khoản của tôi </a> </li>
+                  <li> <a href="#"> Điều khoản & Điều kiện </a> </li>
+                  <li> <a href="#"> Khuyến mại </a> </li>
                 </ul>
               </div>
             </div>
           </div>
           <div class="col-xl-2 col-md-6 col-sm-6 col-12">
             <div class="footer-widget footer-menu-widget clearfix">
-              <h4 class="footer-title">Customer Care</h4>
+              <h4 class="footer-title"> Chăm sóc khách hàng </h4>
               <div class="footer-menu">
                 <ul>
-                  <li><a href="#">Login</a></li>
-                  <li><a href="#">My account</a></li>
-                  <li><a href="#">Wish List</a></li>
-                  <li><a href="#">Order tracking</a></li>
-                  <li><a href="#">FAQ</a></li>
-                  <li><a href="#">Contact us</a></li>
+                  <li> <a href="#"> Đăng nhập </a> </li>
+                  <li> <a href="#"> Tài khoản của tôi </a> </li>
+                  <li> <a href="#"> Danh sách Yêu thích </a> </li>
+                  <li> <a href="#"> Theo dõi đơn hàng </a> </li>
+                  <li> <a href="#"> Câu hỏi thường gặp </a> </li>
+                  <li> <a href="#"> Liên hệ với chúng tôi </a> </li>
                 </ul>
               </div>
             </div>
           </div>
           <div class="col-xl-3 col-md-6 col-sm-12 col-12">
             <div class="footer-widget footer-newsletter-widget">
-              <h4 class="footer-title">Newsletter</h4>
+              <h4 class="footer-title"> Bản tin </h4>
               <p>
-                Subscribe to our weekly Newsletter and receive updates via
-                email.
+                Đăng ký Bản tin hàng tuần của chúng tôi và nhận thông tin cập nhật qua
+                e-mail.
               </p>
               <div class="footer-newsletter">
                 <form action="#">
@@ -182,7 +182,7 @@
                   </div>
                 </form>
               </div>
-              <h5 class="mt-30">We Accept</h5>
+              <h5 class="mt-30">Chúng tôi đồng ý</h5>
               <img src="img/icons/payment-4.png" alt="Payment Image" />
             </div>
           </div>

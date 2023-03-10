@@ -9051,7 +9051,13 @@ ul.wp-block-latest-posts.is-grid.alignwide {
 }
 
 .ltn__tab-menu-2 a.active {
-    color: var( --ltn__primary-color-3);
+    color: var( --green);
+    background-color: transparent;
+    border-color: var(--ltn__secondary-color);
+}
+
+a.noActive {
+    color: var( --black);
     background-color: transparent;
     border-color: var(--ltn__secondary-color);
 }
@@ -12813,7 +12819,7 @@ blockquote::before {
 .contact-form-box {
     padding: 40px 50px 50px;
     position: relative;
-    z-index: 1;
+    /* z-index: 1; */
 }
 
 .contact-form-box input::-webkit-input-placeholder {

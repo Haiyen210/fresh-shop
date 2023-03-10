@@ -105,17 +105,29 @@
             <div class="header-search-wrap">
               <div class="header-search-1">
                 <div class="search-icon">
-                  <i class="icon-search for-search-show"></i>
-                  <i class="icon-cancel for-search-close"></i>
+                  <i class="icon-search for-search-show" @click="onToggle"></i>
+                  <i v-on:click="choose" class="icon-cancel for-search-close" @click="onClose"
+                    v-if="isShow == true"></i>
                 </div>
               </div>
-              <div class="header-search-1-form">
+              <div class="header-search-1-form" v-if="isShow == true && isActive == false">
                 <form id="#" method="get" action="#">
-                  <input type="text" name="search" value="" placeholder="Search here..." />
+                  <input type="text" class="form-control form-input" name="search" placeholder="Tìm kiếm..."
+                    v-model="query" />
                   <button type="submit">
                     <span><i class="icon-search"></i></span>
                   </button>
                 </form>
+                <div class="list-search" v-if="query">
+                  <ul v-for="item in search" :key="item">
+                    <li>
+                      <router-link v-on:click="choose" :to="{ name: 'Detail', params: { id: item.id } }">{{ item.name
+                      }}
+                      </router-link>
+                    </li>
+                  </ul>
+                </div>
+
               </div>
             </div>
             <!-- user-menu -->
@@ -124,12 +136,12 @@
                 <li>
                   <a href="#"><i class="icon-user"></i></a>
                   <ul v-if="login">
-                    <!-- <li><router-link :to="{name:'Login'}">Đăng Nhập</router-link></li>
-                    <li><router-link :to="{name:'Register'}">Đăng Ký</router-link></li> -->
                     <li>
                       <router-link :to="{ name: 'MyAccount' }">Tài khoản của tôi</router-link>
                     </li>
-                    <li><a href="#">Yêu Thích</a></li>
+                    <li>
+                      <router-link :to="{ name: 'Favorite' }">Yêu Thích</router-link>
+                    </li>
                   </ul>
                   <ul v-else>
                     <li>
@@ -139,9 +151,8 @@
                       <router-link :to="{ name: 'Register' }">Đăng Ký</router-link>
                     </li>
                     <li>
-                      <router-link :to="{ name: 'MyAccount' }">Tài khoản của tôi</router-link>
+                      <router-link :to="{ name: 'Favorite' }">Yêu Thích</router-link>
                     </li>
-                    <li><a href="#">Yêu Thích</a></li>
                   </ul>
                 </li>
               </ul>
@@ -150,7 +161,8 @@
             <div class="mini-cart-icon">
               <router-link :to="{ name: 'Cart' }" class="ltn__utilize-toggle">
                 <i class="icon-shopping-cart"></i>
-                <sup>{{ count }}</sup>
+                <sup v-if="count">{{ count }}</sup>
+                <sup v-else>0</sup>
               </router-link>
             </div>
             <!-- mini-cart -->
@@ -173,84 +185,104 @@
     <!-- ltn__header-middle-area end -->
   </header>
   <!-- HEADER AREA END -->
-  <!-- Utilize Cart Menu Start -->
-  <!-- <div id="ltn__utilize-cart-menu" class="ltn__utilize ltn__utilize-cart-menu">
-        <div class="ltn__utilize-menu-inner ltn__scrollbar">
-            <div class="ltn__utilize-menu-head">
-                <span class="ltn__utilize-menu-title">Cart</span>
-                <button class="ltn__utilize-close">×</button>
-            </div>
-            <div class="mini-cart-product-area ltn__scrollbar">
-                <div class="mini-cart-item clearfix">
-                    <div class="mini-cart-img">
-                        <a href="#"><img src="img/product/1.png" alt="Image"></a>
-                        <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
-                    </div>
-                    <div class="mini-cart-info">
-                        <h6><a href="#">Red Hot Tomato</a></h6>
-                        <span class="mini-cart-quantity">1 x $65.00</span>
-                    </div>
-                </div>
-                <div class="mini-cart-item clearfix">
-                    <div class="mini-cart-img">
-                        <a href="#"><img src="img/product/2.png" alt="Image"></a>
-                        <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
-                    </div>
-                    <div class="mini-cart-info">
-                        <h6><a href="#">Vegetables Juices</a></h6>
-                        <span class="mini-cart-quantity">1 x $85.00</span>
-                    </div>
-                </div>
-                <div class="mini-cart-item clearfix">
-                    <div class="mini-cart-img">
-                        <a href="#"><img src="img/product/3.png" alt="Image"></a>
-                        <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
-                    </div>
-                    <div class="mini-cart-info">
-                        <h6><a href="#">Orange Sliced Mix</a></h6>
-                        <span class="mini-cart-quantity">1 x $92.00</span>
-                    </div>
-                </div>
-                <div class="mini-cart-item clearfix">
-                    <div class="mini-cart-img">
-                        <a href="#"><img src="img/product/4.png" alt="Image"></a>
-                        <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
-                    </div>
-                    <div class="mini-cart-info">
-                        <h6><a href="#">Orange Fresh Juice</a></h6>
-                        <span class="mini-cart-quantity">1 x $68.00</span>
-                    </div>
-                </div>
-            </div>
-            <div class="mini-cart-footer">
-                <div class="mini-cart-sub-total">
-                    <h5>Subtotal: <span>$310.00</span></h5>
-                </div>
-                <div class="btn-wrapper">
-                    <a href="cart.html" class="theme-btn-1 btn btn-effect-1">View Cart</a>
-                    <a href="cart.html" class="theme-btn-2 btn btn-effect-2">Checkout</a>
-                </div>
-                <p>Free Shipping on All Orders Over $100!</p>
-            </div>
-
-        </div>
-    </div> -->
-  <!-- Utilize Cart Menu End -->
 </template>
+<style>
+.list-search {
+  position: fixed;
+  background: #fff;
+  width: 21%;
+}
+
+/* .active {
+  display: block;
+}
+
+.noActive {
+  display: none;
+} */
+/* .isActive{
+  display: none;
+} */
+</style>
 <script>
 import store from '@/store';
 import { ref } from '@vue/reactivity';
+import { computed } from '@vue/runtime-core';
+import AccountService from "@/services/AccountService";
+
 export default {
   setup() {
+    const product = computed(() => store.state.product);
     let login = JSON.parse(localStorage.getItem("login"));
-    let count = 0;
     let user_name = ref("");
     if (login && store.state.cart) {
       user_name.value = login.name;
-      count = store.state.cart.length;
-      console.log(count, user_name.value);
     }
-    return { count, user_name, login }
+    const query = ref("");
+    const search = computed(() => {
+      if (query.value) {
+        return product.value.filter((product) => {
+          return product.name.toLowerCase().indexOf(query.value.toLowerCase()) != -1;
+        });
+      } else {
+        return product;
+      }
+    })
+    const isShow = true;
+    const isActive = ref(false);
+    function choose() {
+      query.value = '';
+      isActive.value = false;
+      isShow = true;
+    }
+
+    function onToggle() {
+      // isShow = !isShow;
+      isShow = false;
+      isActive.value = true
+
+    }
+    function onClose() {
+      query.value = '';
+      isShow = true;
+      isActive.value = false;
+    }
+    return { user_name, login, query, search, choose, isActive, isShow, onToggle, onClose }
+  },
+  computed: {
+    count() {
+      let login = JSON.parse(localStorage.getItem("login"));
+      let names;
+      if (store.state.cart) {
+        for (let i = 0; i < store.state.cart.length; i++) {
+          const element = store.state.cart[i];
+          names = element.name_user
+        }
+      }
+
+      if (store.state.cart && login && login.name == names) {
+        return store.state.cart.length
+      } 
+      else {
+        return 0
+      }
+
+
+
+    }
+
+  },
+  mounted() {
+    AccountService.getAll()
+      .then((res) => {
+        localStorage.setItem("checkRegister", JSON.stringify(res.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        // console.log(this.user);
+      })
   }
 }
 </script>

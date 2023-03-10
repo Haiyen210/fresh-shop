@@ -1,7 +1,7 @@
 import { ref } from "vue";
 import router from "./router";
-// import { createToast } from 'mosha-vue-toastify';
-// import 'mosha-vue-toastify/dist/style.css'
+import { createToast } from 'mosha-vue-toastify';
+import 'mosha-vue-toastify/dist/style.css'
 export default function() {
     const login = ref({
         name: "",
@@ -44,7 +44,8 @@ export default function() {
                     passwords = user[i].password;
                     names = user[i].name;
                     roles = user[i].role;
-                    images = user[i].images
+                    images = user[i].images;
+                    localStorage.setItem("account", JSON.stringify(user[i]));
                 }
 
 
@@ -86,6 +87,11 @@ export default function() {
             errorPassword.value.text = "";
             errorPassword.value.status = false;
         }
+        if (roles != true) {
+            alert("Tài khoản này không có!!!!")
+            errorLogin.value.text = "Tài khoản này không có!!!!";
+            // errorLogin.value.status = true
+        }
         if (errorPassword.value.status == false && errorEmail.value.status == false && roles == true) {
             login.value.name = names;
             login.value.image = images;
@@ -93,22 +99,15 @@ export default function() {
             if (login.value) {
                 localStorage.setItem('login', JSON.stringify(login.value));
             }
+            createToast({
+                title: 'Thành công',
+                description: 'Đăng nhập thành công!!!!',
+                type: 'success',
+                timeout: 1000,
 
-            // createToast({
-            //     title: 'Thành công',
-            //     description: 'Đăng nhập thành công!!!!',
-            //     type: 'success',
-            //     timeout: 1000,
-
-            // })
-            router.push({ name: 'Home' })
-
-        } else {
-            errorLogin.value.text = "Tài khoản này không có!!!!";
-            errorLogin.value.status = true
-
+            })
+            window.location.href = '/';
         }
-
 
     }
 
